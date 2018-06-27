@@ -46,12 +46,14 @@ import { LoginComponent } from './login/login.component';
       { path: '', component: HomeComponent},
       { path: 'products', component: ProductsComponent},
       { path: 'shopping-cart', component: ShoppingCartComponent},
-      { path: 'checkout', component: CheckoutComponent, canActivate[AuthGaurd]},
-      { path: 'order-success', component: OrderSuccessComponent},
-      { path: 'my/orders', component: MyOrdersComponent},
       { path: 'login', component: LoginComponent},
-      { path: 'admin/products', component: AdminProductsComponent},
-      { path: 'admin/orders', component: AdminOrdersComponent}
+      
+      { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGaurd]},
+      { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGaurd]},
+      { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGaurd]},
+
+      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGaurd]},
+      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGaurd]}
     ])
   ],
   providers: [
