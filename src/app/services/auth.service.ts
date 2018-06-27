@@ -7,7 +7,7 @@ import * as firebase from 'firebase';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit {
+export class AuthService {
 
   user$: Observable<firebase.User>;
 
