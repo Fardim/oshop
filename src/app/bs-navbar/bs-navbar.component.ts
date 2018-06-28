@@ -1,3 +1,4 @@
+import { AppUser } from './../models/app-user';
 import { AuthService } from './../services/auth.service';
 import { Component } from '@angular/core';
 
@@ -8,10 +9,10 @@ import { Component } from '@angular/core';
 })
 export class BsNavbarComponent {
   // user: firebase.User;
-
+  appUser: AppUser;
   constructor(public auth: AuthService) { 
     //this.afAuth.authState.subscribe(user=> this.user = user);
-    
+    this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
   }
   logout(){
     this.auth.logout();
