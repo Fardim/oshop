@@ -1,3 +1,5 @@
+import { ProductsService } from './services/products.service';
+import { CategoryService } from './services/category.service';
 import { AdminAuthGaurd } from './services/admin-auth-gaurd.service';
 import { AuthGaurd } from './services/auth-gaurd.service';
 import { AuthService } from './services/auth.service';
@@ -10,6 +12,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CustomFormsModule } from 'ng2-validation';
 
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
@@ -23,6 +26,8 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
 import { UserService } from './services/user.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,10 +41,13 @@ import { UserService } from './services/user.service';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    CustomFormsModule,
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -54,6 +62,8 @@ import { UserService } from './services/user.service';
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGaurd]},
       { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGaurd]},
 
+      { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGaurd, AdminAuthGaurd]},
+      { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGaurd, AdminAuthGaurd]},
       { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGaurd, AdminAuthGaurd]},
       { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGaurd, AdminAuthGaurd]}
     ])
@@ -62,7 +72,9 @@ import { UserService } from './services/user.service';
     AuthService,
     AuthGaurd,
     AdminAuthGaurd,
-    UserService
+    UserService,
+    CategoryService,
+    ProductsService
   ],
   bootstrap: [AppComponent]
 })
