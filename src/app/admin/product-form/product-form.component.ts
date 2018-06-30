@@ -32,7 +32,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   save(product) {
-    if(this.id){
+    if (this.id) {
       this.productsService.update(this.id, product);
     } else {
       this.productsService.create(product);
@@ -41,7 +41,7 @@ export class ProductFormComponent implements OnInit {
     this.router.navigate(['/admin/products']);
   }
 
-  delete(){
+  delete() {
     if (!confirm('Are u sure u want to delete the product?')) {
       return;
     }
