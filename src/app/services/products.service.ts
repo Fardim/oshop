@@ -9,7 +9,7 @@ import { ChangeDetectorStatus } from '@angular/core/src/change_detection/constan
   providedIn: 'root'
 })
 export class ProductsService {
-
+  products: Observable<any[]>;
   constructor(private db: AngularFireDatabase) { }
 
   create(product){
@@ -17,9 +17,11 @@ export class ProductsService {
   }
 
   getAll(){
-    return this.db.list('/products').snapshotChanges().pipe(map(prod => {
+    this.products = this.db.list('/products').snapshotChanges().pipe(map(prod => {
       return prod.map(c => ({key: c.payload.key, ...c.payload.val()}));
     }));
+
+    return this.products;
   }
 
   get(productId){
